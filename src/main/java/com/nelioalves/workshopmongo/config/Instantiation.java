@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.nelioalves.workshopmongo.domain.Post;
 import com.nelioalves.workshopmongo.domain.User;
+import com.nelioalves.workshopmongo.dto.AutorDTO;
 import com.nelioalves.workshopmongo.repository.PostRepository;
 import com.nelioalves.workshopmongo.repository.UserRepository;
 
@@ -35,17 +36,18 @@ public class Instantiation implements CommandLineRunner{
 		User alex = new User(null, "Alex Green", "alex@gmail.com");
 		User bob = new User(null, "Bob Grey", "bob@gmail.com");
 		
+		//Salva os novos dados no MongoDB automaticamente
+		userRepository.saveAll(Arrays.asList(maria,alex,bob));
 
 		
 		Post post1 = new Post(null, LocalDate.parse("21/03/2018", fmt)
-				, "Partiu Viagem!", "Vou viajar para São Paulo. Abraços!", maria);
+				, "Partiu Viagem!", "Vou viajar para São Paulo. Abraços!", new AutorDTO(maria));
 		
 		Post post2 = new Post(null, LocalDate.parse("23/03/2018", fmt)
-				,"Bom dia!", "Acordei feliz hoje.", maria);
+				,"Bom dia!", "Acordei feliz hoje.", new AutorDTO(maria));
 		
 		
 		//Salva os novos dados no MongoDB automaticamente
-		userRepository.saveAll(Arrays.asList(maria,alex,bob));
 		postRepository.saveAll(Arrays.asList(post1,post2));
 
 	}
