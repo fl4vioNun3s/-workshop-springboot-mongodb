@@ -49,6 +49,10 @@ public class Instantiation implements CommandLineRunner{
 		
 		//Salva os novos dados no MongoDB automaticamente
 		postRepository.saveAll(Arrays.asList(post1,post2));
+		
+		//Associa os posts com a Maria e salva eles.
+		maria.getPosts().addAll(Arrays.asList(post1,post2));
+		userRepository.save(maria);
 
 	}
 
