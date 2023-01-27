@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import com.nelioalves.workshopmongo.domain.Post;
 import com.nelioalves.workshopmongo.domain.User;
 import com.nelioalves.workshopmongo.dto.AutorDTO;
+import com.nelioalves.workshopmongo.dto.CommentDTO;
 import com.nelioalves.workshopmongo.repository.PostRepository;
 import com.nelioalves.workshopmongo.repository.UserRepository;
 
@@ -46,6 +47,13 @@ public class Instantiation implements CommandLineRunner{
 		Post post2 = new Post(null, LocalDate.parse("23/03/2018", fmt)
 				,"Bom dia!", "Acordei feliz hoje.", new AutorDTO(maria));
 		
+		//Comentarios dos posts
+		CommentDTO comment1 = new CommentDTO("Boa viagem, mano!", LocalDate.parse("21/03/2018", fmt), "Alex Green");
+		CommentDTO comment2 = new CommentDTO("Aproveite!", LocalDate.parse("22/03/2018", fmt), "Bob Grey");
+		CommentDTO comment3 = new CommentDTO("Tenha um otimo dia!", LocalDate.parse("23/03/2018", fmt), "Alex Green");
+		
+		post1.getComments().addAll(Arrays.asList(comment1,comment2));
+		post2.getComments().addAll(Arrays.asList(comment3));
 		
 		//Salva os novos dados no MongoDB automaticamente
 		postRepository.saveAll(Arrays.asList(post1,post2));
